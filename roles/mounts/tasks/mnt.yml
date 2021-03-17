@@ -1,0 +1,48 @@
+---
+
+- name: check mount destination
+  file:
+    path: "{{ mount_item.dest }}"
+    state: directory
+
+- name: create mount file
+  copy:
+    dest: "/usr/lib/systemd/system/{{ mount_item.name }}.mount"
+    content: |
+      [Unit]
+      Description=Mount unit {{ mount_item.description }}
+      Before={{ mount_item.before }}
+      After={{ mount_item.after }}
+
+      [Mount]
+      What={{ mount_item.src }}
+      Where={{ mount_item.dest }}
+      Type={{ mount_item.type }}
+      Options={{ mount_item.options }}
+      TimeoutSec={{ mount_item.timeoutsec | default(system_mounts_timeoutsec) }}
+
+      [Install]
+      WantedBy={{ mount_item.wantedby }}
+
+- name: create automount
+  copy:
+    dest: "/usr/lib/systemd/system/{{ mount_item.name }}.automount"
+    content: |
+      [Unit]
+      Description=Automount unit {{ mount_item.description }}
+
+      [Automount]
+      Where={{ mount_item.dest }}
+
+      [Install]
+      WantedBy={{ mount_item.wantedby }}
+
+- name: Start nas mount service
+  ansible.builtin.systemd:
+    state: "{{ mount_item.service_state }}"
+    enabled: true
+    daemon_reload: yes
+    name: "{{ item }}"
+  with_list:
+    - "{{ mount_item.name }}.automount"
+    - "{{ mount_item.name }}.mount"

@@ -1,0 +1,40 @@
+namespace: rockaut
+name: system
+
+version: 1.2.0-3
+
+readme: README.md
+
+authors:
+- Fischbacher Markus <fischbacher.markus@outlook.com>
+
+description: Basic Collection for managing my host-stack
+
+license:
+- GPL-2.0-or-later
+
+license_file: ''
+
+tags:
+  - linux
+  - system
+
+# Collections that this collection requires to be installed for it to be usable. The key of the dict is the
+# collection label 'namespace.name'. The value is a version range
+# L(specifiers,https://python-semanticversion.readthedocs.io/en/latest/#requirement-specification). Multiple version
+# range specifiers can be set and are separated by ','
+dependencies:
+  "community.general": ">=1.0.0"
+  "ansible.posix": ">=1.0.0"
+  "ansible.utils": ">=1.0.0"
+
+repository: https://github.com/fischbacher-rocks/ansible.collection.system.git
+documentation: https://github.com/fischbacher-rocks/ansible.collection.system.git
+homepage: https://github.com/fischbacher-rocks/ansible.collection.system.git
+issues: https://github.com/fischbacher-rocks/ansible.collection.system.git
+
+# A list of file glob-like patterns used to filter any files or directories that should not be included in the build
+# artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
+# uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
+# and '.git' are always filtered
+build_ignore: []

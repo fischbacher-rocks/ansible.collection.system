@@ -1,0 +1,11 @@
+---
+
+- name: install required packages
+  package:
+    name: "{{ system_mounts_packages }}"
+    state: present
+
+- include_tasks: mnt.yml
+  with_list: "{{ system_mounts }}"
+  loop_control:
+    loop_var: "mount_item"

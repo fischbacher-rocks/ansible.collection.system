@@ -1,0 +1,31 @@
+---
+
+- name: Set storage mode
+  notify: restart systemd-journald
+  ini_file:
+    dest: "{{ journald_config_file }}"
+    section: Journal
+    option: Storage
+    value: "{{ journald_storage }}"
+    no_extra_spaces: yes
+  when: "journald_storage | length > 0"
+
+- name: Set compression
+  notify: restart systemd-journald
+  ini_file:
+    dest: "{{ journald_config_file }}"
+    section: Journal
+    option: Compress
+    value: "{{ journald_compress }}"
+    no_extra_spaces: yes
+  when: "journald_compress | length > 0"
+
+- name: Set max usage
+  notify: restart systemd-journald
+  ini_file:
+    dest: "{{ journald_config_file }}"
+    section: Journal
+    option: SystemMaxUse
+    value: "{{ journald_system_max_use }}"
+    no_extra_spaces: yes
+  when: "journald_system_max_use | length > 0"

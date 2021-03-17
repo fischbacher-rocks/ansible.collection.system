@@ -1,0 +1,10 @@
+---
+
+system_upgrade: false
+system_upgrade_style: dist # full, false
+
+system_update_cache: true
+system_update_cache_time: 3600
+
+system_upgrade_autoclean: true
+system_upgrade_autoremove: true

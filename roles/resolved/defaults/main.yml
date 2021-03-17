@@ -1,0 +1,14 @@
+---
+resolved_config_file: "/etc/systemd/resolved.conf"
+
+#DNS=
+#FallbackDNS=
+#Domains=
+#DNSSEC=no
+#DNSOverTLS=no
+#MulticastDNS=no
+#LLMNR=no
+#Cache=no-negative
+resolved_DNSStubListener: "yes"
+#ReadEtcHosts=yes
+#ResolveUnicastSingleLabel=no

@@ -1,0 +1,11 @@
+---
+
+- name: Set DNS stup listener
+  notify: restart systemd-resolved
+  ini_file:
+    dest: "{{ resolved_config_file }}"
+    section: Resolve
+    option: DNSStubListener
+    value: "{{ resolved_DNSStubListener }}"
+    no_extra_spaces: yes
+  when: "resolved_DNSStubListener | length > 0"

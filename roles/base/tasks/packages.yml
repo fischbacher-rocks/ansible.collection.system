@@ -1,0 +1,39 @@
+---
+
+#
+# remove pacakges
+#
+
+- name: Packages | remove global packages
+  package:
+    name: "{{ system_global_remove_packages }}"
+    state: absent
+
+- name: Packages | remove group packages
+  package:
+    name: "{{ system_group_remove_packages }}"
+    state: absent
+
+- name: Packages | remove host packages
+  package:
+    name: "{{ system_host_remove_packages }}"
+    state: absent
+
+#
+# install pacakges
+#
+
+- name: Packages | install global packages
+  package:
+    name: "{{ system_global_install_packages }}"
+    state: present
+
+- name: Packages | install group packages
+  package:
+    name: "{{ system_group_install_packages }}"
+    state: present
+
+- name: Packages | install host packages
+  package:
+    name: "{{ system_host_install_packages }}"
+    state: present
