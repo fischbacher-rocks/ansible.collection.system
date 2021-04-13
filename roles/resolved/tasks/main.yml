@@ -1,5 +1,35 @@
 ---
 
+- name: Set DNS servers
+  notify: restart systemd-resolved
+  ini_file:
+    dest: "{{ resolved_config_file }}"
+    section: Resolve
+    option: DNS
+    value: "{{ resolved_DNS | join(' ') }}"
+    no_extra_spaces: yes
+  when: "resolved_DNS | length > 0"
+
+- name: Set FallbackDNS servers
+  notify: restart systemd-resolved
+  ini_file:
+    dest: "{{ resolved_config_file }}"
+    section: Resolve
+    option: FallbackDNS
+    value: "{{ resolved_FallbackDNS | join(' ') }}"
+    no_extra_spaces: yes
+  when: "resolved_FallbackDNS | length > 0"
+
+- name: Set Domains servers
+  notify: restart systemd-resolved
+  ini_file:
+    dest: "{{ resolved_config_file }}"
+    section: Resolve
+    option: Domains
+    value: "{{ resolved_Domains | join(' ') }}"
+    no_extra_spaces: yes
+  when: "resolved_Domains | length > 0"
+
 - name: Set DNS stub listener
   notify: restart systemd-resolved
   ini_file:
