@@ -1,0 +1,22 @@
+---
+
+- name: install required packages
+  package:
+    name: "{{ keepalived_packages }}"
+    state: present
+
+- name: create config dir
+  file:
+    state: directory
+    path: "{{ keepalived_config_dir }}"
+
+- name: Write base config
+  notify: restart keepalived
+  copy:
+    dest: "{{ keepalived_base_config_file }}"
+    content: "{{ keepalived_base_config }}"
+
+- include_tasks: vrrps.yml
+  with_dict: "{{ keepalived_configs }}"
+  loop_control:
+    loop_var: "vrrp"

@@ -1,0 +1,7 @@
+---
+
+- name: "Write {{ vrrp }} config"
+  notify: restart keepalived
+  copy:
+    dest: "{{ keepalived_config_dir }}/{{ vrrp.key }}.conf"
+    content: "{{ vrrp.value }}"

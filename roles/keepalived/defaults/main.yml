@@ -1,0 +1,14 @@
+---
+
+keepalived_packages:
+  - keepalived
+
+keepalived_base_config_file: /etc/keepalived/keepalived.conf
+keepalived_config_dir: /etc/keepalived/conf.d/
+
+keepalived_base_config: |
+  include /etc/keepalived/conf.d/*.conf
+
+keepalived_configs: {}
+#  test: |
+#    whatever goes in config
