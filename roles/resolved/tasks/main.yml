@@ -1,6 +1,6 @@
 ---
 
-- name: Set DNS stup listener
+- name: Set DNS stub listener
   notify: restart systemd-resolved
   ini_file:
     dest: "{{ resolved_config_file }}"
